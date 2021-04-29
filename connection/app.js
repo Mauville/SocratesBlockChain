@@ -10,7 +10,7 @@ let Appual = {
     logMessage: async function (message) {
         console.log("Attempting to log ", message)
         const instance = await Logger.deployed();
-        const result = await instance.logMessage(message,{from: "0x00CFd89C151D8bBfd52Cd75C1c8d68B8abBd0695"}).then(function (e) {
+        const result = await instance.logMessage(message,{from: "0x06820df6D985bAc297C0Dee6603CDabb86FFcCDD"}).then(function (e) {
             console.log(e);
         })
 
