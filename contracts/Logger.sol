@@ -3,19 +3,26 @@ pragma experimental ABIEncoderV2;
 
 contract Logger {
 
-    string [1000] public log;
+    uint [1000] public log;
     uint currentindex = 0;
+    uint storedData;
 
-    constructor() public{
-        log[currentindex] = "-BEGIN ELECTION";
-        currentindex++;
+//    constructor() public{
+//        log[currentindex] = 1;
+//        currentindex++;
+//    }
+    function logMessage(uint x) public{
+        storedData = x;
     }
-    function logMessage(string memory newMessage) public{
-        log[currentindex] = newMessage;
-        currentindex++;
-
+    function getLog() public view returns(uint){
+        return storedData;
     }
-    function getLog() public view returns (string[1000] memory){
-        return log;
-    }
+//    function logMessage(uint newMessage) public{
+//        log[currentindex] = newMessage;
+//        currentindex++;
+//
+//    }
+//    function getLog() public view returns (uint[1000] memory){
+//        return log;
+//    }
 }

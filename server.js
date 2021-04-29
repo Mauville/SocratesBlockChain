@@ -11,7 +11,7 @@ app.use(bodyParser.urlencoded({ extended: false }));
 // parse application/json
 app.use(bodyParser.json());
 
-app.use('/', express.static('public_static'));
+//app.use('/', express.static('public_static'));
 
 
 app.post('/log', (req, res) => {
@@ -19,16 +19,26 @@ app.post('/log', (req, res) => {
   console.log(req.body);
   let message = req.body.message;
   console.log(message)
-  truffle_connect.log(message)
-  res.send("DONE")
+  truffle_connect.log(message).then( function (e){
+    res.send("DONE")
+  }
+  ).catch(function (e){
+    console.log(e)
+    res.send("FAILURE")
+  })
 });
 
 app.get('/getLog', (req, res) => {
   console.log("**** GET /getLog ****");
   console.log(req.body);
+  truffle_connect.getLog().then(function (e){
+        res.send(e)
+      }
+  ).catch(function (e){
+    console.log(e)
+    res.send("FAILURE")
+  })
 
-
-  res.send(truffle_connect.getLog())
 });
 
 app.listen(port, () => {
