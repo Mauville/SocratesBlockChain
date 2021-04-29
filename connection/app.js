@@ -4,14 +4,13 @@ const logger_artifact = require('../build/contracts/Logger.json');
 var Logger = contract(logger_artifact);
 var provider = new Web3.providers.HttpProvider('http://127.0.0.1:7545');
 Logger.setProvider(provider)
-Logger.defaults()
 let Appual = {
 
 
-    log: async function (message) {
+    logMessage: async function (message) {
         console.log("Attempting to log ", message)
         const instance = await Logger.deployed();
-        const result = await instance.logMessage(1).then(function (e){
+        const result = await instance.logMessage(message,{from: "0x00CFd89C151D8bBfd52Cd75C1c8d68B8abBd0695"}).then(function (e) {
             console.log(e);
         })
 
@@ -20,10 +19,15 @@ let Appual = {
         console.log("Attempting to return log ")
         // Bootstrap the MetaCoin abstraction for Use.
         const instance = await Logger.deployed();
-        const result = await instance.getLog();
-        console.log(result);
+        let valor = null;
+        const result = await instance.getLog().then(function (val) {
+                console.log("logging value: ", val);
+                valor  = val
+            }
+        );
+        return valor;
 
-        return result
+
     }
 }
 

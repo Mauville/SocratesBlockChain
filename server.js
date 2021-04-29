@@ -19,7 +19,7 @@ app.post('/log', (req, res) => {
   console.log(req.body);
   let message = req.body.message;
   console.log(message)
-  truffle_connect.log(message).then( function (e){
+  truffle_connect.logMessage(message).then( function (e){
     res.send("DONE")
   }
   ).catch(function (e){

@@ -1,11 +1,12 @@
 pragma solidity >=0.4.25 <0.6.0;
-pragma experimental ABIEncoderV2;
+//pragma experimental ABIEncoderV2;
 
 contract Logger {
 
     uint [1000] public log;
     uint currentindex = 0;
-    uint storedData;
+    event ValueSet(uint val);
+    uint storedData = 0;
 
 //    constructor() public{
 //        log[currentindex] = 1;
@@ -13,6 +14,7 @@ contract Logger {
 //    }
     function logMessage(uint x) public{
         storedData = x;
+        emit ValueSet(x);
     }
     function getLog() public view returns(uint){
         return storedData;
